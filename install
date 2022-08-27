@@ -21,6 +21,7 @@ install() {
   fi
 
   if [ "$(os::is_macos)" = "true" ]; then
+    arch="x86_64" # mac no aarch64 found
     typ="apple"
     os="darwin"
     bin_path=/usr/local/bin
