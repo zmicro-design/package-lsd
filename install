@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -e
+
+VERSION=0.22.0
+
+help() {
+  echo "Usage:"
+  echo "  zmicro package install lsd <args...>"
+  echo ""
+}
+
+install() {
+  local arch="x86_64"
+  local typ="unknown"
+  local os="linux-gnu"
+  local bin_path=/usr/bin
+
+  if [ "$(os::arch)" = "arm64" ]; then
+    arch="aarch64"
+  fi
+
+  if [ "$(os::is_macos)" = "true" ]; then
+    typ="apple"
+    os="darwin"
+    bin_path=/usr/local/bin
+  fi
+
+  local tmp_file=/tmp/lsd.tar.gz
+  local url="https://github.com/Peltoche/lsd/releases/download/${VERSION}/lsd-${VERSION}-${arch}-${typ}-${os}.zip"
+  curl -fSL $url -o $tmp_file
+  cd /tmp
+  tar -zxvf $tmp_file >>/dev/null 2>&1
+  sudo mv lsd-${VERSION}-${arch}-${typ}-${os}/lsd $bin_path
+  rm -rf $tmp_file
+  rm -rf lsd-${VERSION}-${arch}-${typ}-${os}
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  install
+  log::success "install frp success."
+}
+
+run() {
+  core $@
+}
+
+run $@

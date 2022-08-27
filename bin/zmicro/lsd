@@ -1,0 +1,17 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  zmicro lsd <args ...>"
+  echo ""
+}
+
+core() {
+  lsd "$@"
+}
+
+run() {
+  core "$@"
+}
+
+run "$@"
