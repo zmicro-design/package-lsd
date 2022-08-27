@@ -44,7 +44,7 @@ core() {
   fi
 
   install
-  log::success "install frp success."
+  log::success "install lsd success."
 }
 
 run() {
