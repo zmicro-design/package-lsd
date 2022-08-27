@@ -28,7 +28,7 @@ install() {
   fi
 
   local tmp_file=/tmp/lsd.tar.gz
-  local url="https://github.com/Peltoche/lsd/releases/download/${VERSION}/lsd-${VERSION}-${arch}-${typ}-${os}.zip"
+  local url="https://github.com/Peltoche/lsd/releases/download/${VERSION}/lsd-${VERSION}-${arch}-${typ}-${os}.tar.gz"
   curl -fSL $url -o $tmp_file
   cd /tmp
   tar -zxvf $tmp_file >>/dev/null 2>&1
